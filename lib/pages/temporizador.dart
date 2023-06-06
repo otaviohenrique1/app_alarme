@@ -7,23 +7,37 @@ class Temporizador extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: const [
-        ItemTemporizador(),
-        ItemTemporizador(),
-        ItemTemporizador(),
-        ItemTemporizador(),
-        ItemTemporizador(),
-      ],
+    return ListView.builder(
+      padding: const EdgeInsets.only(bottom: 75),
+      itemCount: 10,
+      itemBuilder: (context, index) {
+        String tempo = "3 minuto(s)";
+        String cronometro = "00:03:00";
+
+        return ItemTemporizador(
+          tempo: tempo,
+          cronometro: cronometro,
+        );
+      },
     );
   }
 }
 
-class ItemTemporizador extends StatelessWidget {
+class ItemTemporizador extends StatefulWidget {
   const ItemTemporizador({
     super.key,
+    required this.tempo,
+    required this.cronometro,
   });
 
+  final String tempo;
+  final String cronometro;
+
+  @override
+  State<ItemTemporizador> createState() => _ItemTemporizadorState();
+}
+
+class _ItemTemporizadorState extends State<ItemTemporizador> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,16 +53,16 @@ class ItemTemporizador extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
         children: [
-          const Align(
+          Align(
             alignment: Alignment.center,
             child: Text(
-              "3 minutos",
-              style: TextStyle(fontSize: 16),
+              widget.tempo,
+              style: const TextStyle(fontSize: 16),
             ),
           ),
-          const Text(
-            "00:03:00",
-            style: TextStyle(fontSize: 48),
+          Text(
+            widget.cronometro,
+            style: const TextStyle(fontSize: 48),
           ),
           ElevatedButton(
             onPressed: () {},
