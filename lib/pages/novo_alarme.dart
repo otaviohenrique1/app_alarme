@@ -8,6 +8,10 @@ class NovoAlarme extends StatefulWidget {
 }
 
 class _NovoAlarmeState extends State<NovoAlarme> {
+  bool repetir = false;
+  bool pular = false;
+  bool tomChamada = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,16 +60,13 @@ class _NovoAlarmeState extends State<NovoAlarme> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text("Repetir"),
-              Row(
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      border: Border(left: BorderSide(color: Colors.grey)),
-                    ),
-                    padding: const EdgeInsets.only(left: 8),
-                    child: Switch(value: false, onChanged: (value) {}),
-                  ),
-                ],
+              Switch(
+                value: repetir,
+                onChanged: (value) {
+                  setState(() {
+                    repetir = value;
+                  });
+                },
               ),
             ],
           ),
@@ -80,7 +81,14 @@ class _NovoAlarmeState extends State<NovoAlarme> {
                   Text("Pular para o proximo alarme"),
                 ],
               ),
-              Switch(value: false, onChanged: (value) {}),
+              Switch(
+                value: pular,
+                onChanged: (value) {
+                  setState(() {
+                    pular = value;
+                  });
+                },
+              ),
             ],
           ),
           const Divider(),
@@ -101,7 +109,14 @@ class _NovoAlarmeState extends State<NovoAlarme> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text("Pular"),
-              Switch(value: false, onChanged: (value) {}),
+              Switch(
+                value: tomChamada,
+                onChanged: (value) {
+                  setState(() {
+                    tomChamada = value;
+                  });
+                },
+              ),
             ],
           ),
           const Divider(),
