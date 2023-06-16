@@ -1,3 +1,4 @@
+import 'package:app_alarme/components/botao_flutuante.dart';
 import 'package:flutter/material.dart';
 
 class Temporizador extends StatelessWidget {
@@ -7,18 +8,28 @@ class Temporizador extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.only(bottom: 75),
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        String tempo = "3 minuto(s)";
-        String cronometro = "00:03:00";
+    return Stack(
+      children: [
+        ListView.builder(
+          shrinkWrap: true,
+          padding: const EdgeInsets.only(bottom: 75),
+          itemCount: 2,
+          itemBuilder: (context, index) {
+            String tempo = "3 minuto(s)";
+            String cronometro = "00:03:00";
 
-        return ItemTemporizador(
-          tempo: tempo,
-          cronometro: cronometro,
-        );
-      },
+            return ItemTemporizador(
+              tempo: tempo,
+              cronometro: cronometro,
+            );
+          },
+        ),
+        Positioned(
+          bottom: 16,
+          right: 16,
+          child: BotaoFlutuante(onPressed: () {}),
+        ),
+      ],
     );
   }
 }

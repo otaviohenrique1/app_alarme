@@ -4,8 +4,13 @@ import 'package:provider/provider.dart';
 import 'package:app_alarme/pages/homepage.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => AlarmeProvider(),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => AlarmeProvider()),
+      // ChangeNotifierProvider(create: (context) => RelogioMundialProvider()),
+      // ChangeNotifierProvider(create: (context) => TemporizadorProvider()),
+      // ChangeNotifierProvider(create: (context) => CronometroProvider()),
+    ],
     child: const App(),
   ));
 }

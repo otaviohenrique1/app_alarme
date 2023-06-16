@@ -1,8 +1,8 @@
-import 'package:app_alarme/models/alarme_model.dart';
-import 'package:app_alarme/provider/alarme_provider.dart';
-import 'package:app_alarme/utils/lista.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:app_alarme/components/botao_flutuante.dart';
+import 'package:app_alarme/models/alarme_model.dart';
+import 'package:app_alarme/provider/alarme_provider.dart';
 
 class Alarmes extends StatefulWidget {
   const Alarmes({
@@ -54,28 +54,6 @@ class _AlarmesState extends State<Alarmes> {
   }
 }
 
-class BotaoFlutuante extends StatelessWidget {
-  const BotaoFlutuante({
-    super.key,
-    required this.onPressed,
-  });
-
-  final Function() onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return FloatingActionButton(
-      shape: const CircleBorder(),
-      backgroundColor: Theme.of(context).colorScheme.primary,
-      hoverColor: Theme.of(context).colorScheme.inversePrimary,
-      focusColor: Theme.of(context).colorScheme.inversePrimary,
-      onPressed: onPressed,
-      tooltip: 'Increment',
-      child: const Icon(Icons.add, color: Colors.white),
-    );
-  }
-}
-
 class ItemListaAlarme extends StatefulWidget {
   const ItemListaAlarme({
     super.key,
@@ -94,7 +72,7 @@ class _ItemListaAlarmeState extends State<ItemListaAlarme> {
   @override
   Widget build(BuildContext context) {
     AlarmeModel alarme = widget.alarme;
-    // selecionado = alarme.ativo;
+    selecionado = alarme.ativo;
 
     updateSwitch(value) {
       setState(() {
