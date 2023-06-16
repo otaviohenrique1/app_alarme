@@ -52,15 +52,15 @@ class _HomePageState extends State<HomePage> {
             Temporizador(),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          shape: const CircleBorder(),
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          hoverColor: Theme.of(context).colorScheme.inversePrimary,
-          focusColor: Theme.of(context).colorScheme.inversePrimary,
-          onPressed: () {},
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   shape: const CircleBorder(),
+        //   backgroundColor: Theme.of(context).colorScheme.primary,
+        //   hoverColor: Theme.of(context).colorScheme.inversePrimary,
+        //   focusColor: Theme.of(context).colorScheme.inversePrimary,
+        //   onPressed: () {},
+        //   tooltip: 'Increment',
+        //   child: const Icon(Icons.add),
+        // ),
       ),
     );
   }

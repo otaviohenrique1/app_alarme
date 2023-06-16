@@ -1,8 +1,13 @@
-import 'package:app_alarme/pages/homepage.dart';
+import 'package:app_alarme/provider/alarme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:app_alarme/pages/homepage.dart';
 
 void main() {
-  runApp(const App());
+  runApp(ChangeNotifierProvider(
+    create: (context) => AlarmeProvider(),
+    child: const App(),
+  ));
 }
 
 class App extends StatelessWidget {
