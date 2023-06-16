@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.primary,
-          title: const Text("Alarme", style: TextStyle(color: Colors.white)),
+          title: const Text("Alarme"),
           actions: [
             IconButton(
               onPressed: () {},
@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
             unselectedLabelColor: Colors.white,
             tabs: <Widget>[
               Tab(text: "Alarmes"),
-              Tab(text: "Relogio Mundial"),
+              Tab(text: "Relogio"),
               Tab(text: "Cronometro"),
               Tab(text: "Temporizador"),
             ],

@@ -1,3 +1,4 @@
+import 'package:app_alarme/pages/novo_alarme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:app_alarme/components/botao_flutuante.dart';
@@ -47,7 +48,10 @@ class _AlarmesState extends State<Alarmes> {
         Positioned(
           bottom: 16,
           right: 16,
-          child: BotaoFlutuante(onPressed: () {}),
+          child: BotaoFlutuante(onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const NovoAlarme()));
+          }),
         ),
       ],
     );
