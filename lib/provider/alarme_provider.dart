@@ -28,16 +28,17 @@ class AlarmeProvider extends ChangeNotifier {
     );
 
     _alarme = alarmeBuscado;
+    notifyListeners();
   }
 
   adicionar(AlarmeModel alarme) {
     alarmesLista.add(alarme);
-    buscaTodos();
+    notifyListeners();
   }
 
   remover(String id) {
     alarmesLista.removeWhere((element) => element.id == alarme.id);
-    buscaTodos();
+    notifyListeners();
   }
 
   alterar(AlarmeModel alarme, String id) {
@@ -52,11 +53,11 @@ class AlarmeProvider extends ChangeNotifier {
         break;
       }
     }
-    buscaTodos();
+    notifyListeners();
   }
 
   buscaTodos() {
     _alarmes = alarmesLista;
-    notifyListeners();
+    // notifyListeners();
   }
 }

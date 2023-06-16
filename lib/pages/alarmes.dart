@@ -15,39 +15,41 @@ class Alarmes extends StatefulWidget {
 
 class _AlarmesState extends State<Alarmes> {
   @override
+  void initState() {
+    super.initState();
+    Provider.of<AlarmeProvider>(context, listen: false).buscaTodos();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // AlarmeProvider alarmeProvider =
     //     Provider.of<AlarmeProvider>(context, listen: false);
 
-    // alarmeProvider.buscaTodos();
-
-    return Consumer<AlarmeProvider>(
-      builder: (context, alarmeProviderConsumer, child) {
-        alarmeProviderConsumer.buscaTodos();
-        return Stack(
-          children: [
-            ListView.builder(
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(
-                left: 20,
-                right: 20,
-                top: 16,
-                bottom: 75,
-              ),
-              itemCount: alarmeProviderConsumer.alarmes.length,
-              itemBuilder: (context, index) {
-                var item = alarmeProviderConsumer.alarmes[index];
-                return ItemListaAlarme(alarme: item);
-              },
-            ),
-            Positioned(
-              bottom: 16,
-              right: 16,
-              child: BotaoFlutuante(onPressed: () {}),
-            ),
-          ],
-        );
-      },
+    return Stack(
+      children: [
+        ListView.builder(
+          shrinkWrap: true,
+          padding: const EdgeInsets.only(
+            left: 20,
+            right: 20,
+            top: 16,
+            bottom: 75,
+          ),
+          itemCount: Provider.of<AlarmeProvider>(context, listen: false)
+              .alarmes
+              .length,
+          itemBuilder: (context, index) {
+            var item = Provider.of<AlarmeProvider>(context, listen: false)
+                .alarmes[index];
+            return ItemListaAlarme(alarme: item);
+          },
+        ),
+        Positioned(
+          bottom: 16,
+          right: 16,
+          child: BotaoFlutuante(onPressed: () {}),
+        ),
+      ],
     );
   }
 }
@@ -91,23 +93,21 @@ class _ItemListaAlarmeState extends State<ItemListaAlarme> {
 
   @override
   Widget build(BuildContext context) {
-    selecionado = widget.alarme.ativo;
+    AlarmeModel alarme = widget.alarme;
+    // selecionado = alarme.ativo;
 
-    AlarmeProvider alarmeProvider =
-        Provider.of<AlarmeProvider>(context, listen: false);
-
-    onChanged(value) {
+    updateSwitch(value) {
       setState(() {
         selecionado = value;
-        alarmeProvider.alterar(
+        Provider.of<AlarmeProvider>(context, listen: false).alterar(
           AlarmeModel(
-            id: widget.alarme.id,
-            tempo: widget.alarme.tempo,
-            titulo: widget.alarme.titulo,
-            frequencia: widget.alarme.frequencia,
-            ativo: widget.alarme.ativo,
+            id: alarme.id,
+            tempo: alarme.tempo,
+            titulo: alarme.titulo,
+            frequencia: alarme.frequencia,
+            ativo: alarme.ativo,
           ),
-          widget.alarme.id,
+          alarme.id,
         );
       });
     }
@@ -121,15 +121,15 @@ class _ItemListaAlarmeState extends State<ItemListaAlarme> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.alarme.tempo, style: const TextStyle(fontSize: 22)),
-                Text(widget.alarme.titulo),
+                Text(alarme.tempo, style: const TextStyle(fontSize: 22)),
+                Text(alarme.titulo),
               ],
             ),
             Row(
               children: [
-                Text(widget.alarme.frequencia),
+                Text(alarme.frequencia),
                 const SizedBox(width: 16),
-                Switch(value: selecionado, onChanged: onChanged)
+                Switch(value: selecionado, onChanged: updateSwitch),
               ],
             )
           ],
