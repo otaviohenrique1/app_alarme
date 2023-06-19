@@ -17,25 +17,11 @@ class _CronometroState extends State<Cronometro> {
   int _milissegundos = 0;
   Timer? _timer;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // Inicia o temporizador
-  //   _startTimer();
-  // }
-
-  // @override
-  // void dispose() {
-  //   // Cancela o temporizador ao sair da tela
-  //   _cancelTimer();
-  //   super.dispose();
-  // }
-
   void _startTimer() {
     // Cria um temporizador que executa a função a cada 1 segundo
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(microseconds: 1), (timer) {
       setState(() {
-        _milissegundos += 10;
+        _milissegundos += 1;
         if (_milissegundos >= 1000) {
           _milissegundos = 0;
           _segundos++;
@@ -56,15 +42,21 @@ class _CronometroState extends State<Cronometro> {
     }
   }
 
+  void _resetTimer() {
+    setState(() {
+      _minutos = 0;
+      _segundos = 0;
+      _milissegundos = 0;
+      _cancelTimer();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
       shrinkWrap: true,
       padding: const EdgeInsets.all(16),
       children: [
-        // _minutos
-        // _segundos
-        // _milissegundos
         CronometroPequeno(
           minutos: _minutos,
           segundos: _segundos,
@@ -82,6 +74,10 @@ class _CronometroState extends State<Cronometro> {
         ElevatedButton(
           onPressed: _cancelTimer,
           child: const Text("Parar"),
+        ),
+        ElevatedButton(
+          onPressed: _resetTimer,
+          child: const Text("Zerar"),
         ),
       ],
     );
@@ -105,17 +101,19 @@ class CronometroGrande extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(_minutos.toString(),
-            textAlign: TextAlign.center, style: TextStyle(fontSize: 72)),
+        Text(_minutos.toString().padLeft(2, '0'),
+            textAlign: TextAlign.center, style: const TextStyle(fontSize: 48)),
         const Text(":",
-            textAlign: TextAlign.center, style: TextStyle(fontSize: 72)),
-        Text(_segundos.toString(),
-            textAlign: TextAlign.center, style: TextStyle(fontSize: 72)),
+            textAlign: TextAlign.center, style: TextStyle(fontSize: 48)),
+        Text(_segundos.toString().padLeft(2, '0'),
+            textAlign: TextAlign.center, style: const TextStyle(fontSize: 48)),
         const Text(":",
-            textAlign: TextAlign.center, style: TextStyle(fontSize: 72)),
-        Text(_milissegundos.toString(),
-            textAlign: TextAlign.center, style: TextStyle(fontSize: 72)),
+            textAlign: TextAlign.center, style: TextStyle(fontSize: 48)),
+        Text(_milissegundos.toString().padLeft(3, '0'),
+            textAlign: TextAlign.center, style: const TextStyle(fontSize: 48)),
       ],
     );
   }
@@ -138,17 +136,19 @@ class CronometroPequeno extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("$_minutos",
-            textAlign: TextAlign.center, style: TextStyle(fontSize: 18)),
+        Text(_minutos.toString().padLeft(2, '0'),
+            textAlign: TextAlign.center, style: const TextStyle(fontSize: 18)),
         const Text(":",
             textAlign: TextAlign.center, style: TextStyle(fontSize: 18)),
-        Text("$_segundos",
-            textAlign: TextAlign.center, style: TextStyle(fontSize: 18)),
+        Text(_segundos.toString().padLeft(2, '0'),
+            textAlign: TextAlign.center, style: const TextStyle(fontSize: 18)),
         const Text(":",
             textAlign: TextAlign.center, style: TextStyle(fontSize: 18)),
-        Text("$_milissegundos",
-            textAlign: TextAlign.center, style: TextStyle(fontSize: 18)),
+        Text(_milissegundos.toString().padLeft(3, '0'),
+            textAlign: TextAlign.center, style: const TextStyle(fontSize: 18)),
       ],
     );
   }

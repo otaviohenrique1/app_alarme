@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
         body: const TabBarView(
           children: <Widget>[
             Alarmes(),
-            RelogioMundial(),
+            Relogio(),
             Cronometro(),
             Temporizador(),
           ],
